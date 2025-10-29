@@ -1,7 +1,7 @@
-const Course = require("../../models/Course");
-const StudentCourses = require("../../models/StudentCourses");
+import Course from "../../models/Course.js";
+import StudentCourses from "../../models/StudentCourses.js";
 
-const getAllStudentViewCourses = async (req, res) => {
+export const getAllStudentViewCourses = async (req, res) => {
   try {
     const {
       category = [],
@@ -55,7 +55,7 @@ const getAllStudentViewCourses = async (req, res) => {
   }
 };
 
-const getStudentViewCourseDetails = async (req, res) => {
+export const getStudentViewCourseDetails = async (req, res) => {
   try {
     const { id} = req.params;
     const courseDetails = await Course.findById(id);
@@ -82,7 +82,7 @@ const getStudentViewCourseDetails = async (req, res) => {
   }
 };
  
-const checkCoursePurchaseInfo = async (req, res) => {
+export const checkCoursePurchaseInfo = async (req, res) => {
   try { 
     const { id, studentId } = req.params;
     const studentCourses = await StudentCourses.findOne({
@@ -102,9 +102,4 @@ const checkCoursePurchaseInfo = async (req, res) => {
       message: "Some error occured!",
     });
   }
-};
-module.exports = {
-  getAllStudentViewCourses,
-  getStudentViewCourseDetails,
-  checkCoursePurchaseInfo
 };

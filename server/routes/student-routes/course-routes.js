@@ -1,15 +1,9 @@
-const express = require("express");
-const {
-  getAllStudentViewCourses,
-  getStudentViewCourseDetails,
-  checkCoursePurchaseInfo
-} = require("../../controllers/student-controller/course-controller");
+import express from 'express'
+import { getAllStudentViewCourses, getStudentViewCourseDetails, checkCoursePurchaseInfo } from '../../controllers/student-controller/course-controller.js'
+const studentViewCourseRoutes= express.Router();
 
-const router = express.Router();
+studentViewCourseRoutes.get("/get", getAllStudentViewCourses);
+studentViewCourseRoutes.get("/get/details/:id", getStudentViewCourseDetails);
+studentViewCourseRoutes.get("/purchase-info/:id/:studentId",checkCoursePurchaseInfo)
 
-router.get("/get", getAllStudentViewCourses);
-router.get("/get/details/:id", getStudentViewCourseDetails);
-router.get("/purchase-info/:id/:studentId",checkCoursePurchaseInfo)
-  
-module.exports = router;
-  
+export default studentViewCourseRoutes;

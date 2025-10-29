@@ -1,15 +1,12 @@
-const express = require("express");
-const multer = require("multer");
-const {
-  uploadMediaToCloudinary,
-  deleteMediaFromCloudinary,
-} = require("../../helpers/cloudinary");
+import express from "express";
+import multer from "multer";
+import { deleteMediaFromCloudinary, uploadMediaToCloudinary } from "../../helpers/cloudinary.js";
 
-const router = express.Router();
+const mediaRoutes = express.Router();
 
 const upload = multer({ dest: "uploads/" });
 
-router.post("/upload", upload.single("file"), async (req, res) => {
+mediaRoutes.post("/upload", upload.single("file"), async (req, res) => {
   try {
     const result = await uploadMediaToCloudinary(req.file.path);
     res.status(200).json({
@@ -25,7 +22,7 @@ router.post("/upload", upload.single("file"), async (req, res) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res) => {
+mediaRoutes.delete("/delete/:id", async (req, res) => {
   try {
     const { id } = req.params;
     if (!id) {
@@ -48,7 +45,7 @@ router.delete("/delete/:id", async (req, res) => {
   }
 });
 
-router.post("/bulk-upload",upload.array("files",10),async(req,res)=>{
+mediaRoutes.post("/bulk-upload",upload.array("files",10),async(req,res)=>{
   try {
     const uploadPromises = req.files.map(fileItem=>uploadMediaToCloudinary(fileItem.path))
     const results = await Promise.all(uploadPromises)
@@ -65,4 +62,4 @@ router.post("/bulk-upload",upload.array("files",10),async(req,res)=>{
   } 
 })
 
-module.exports=router;
+export default mediaRoutes;

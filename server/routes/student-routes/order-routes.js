@@ -1,12 +1,8 @@
-const express = require("express");
-const {
-  createOrder,
-  capturePaymentAndFinalizeOrder,
-} = require("../../controllers/student-controller/order-controller");
+import express from 'express'
+import { createOrder, capturePaymentAndFinalizeOrder } from '../../controllers/student-controller/order-controller.js'
+const studentViewOrderRoutes = express.Router();
 
-const router = express.Router();
+studentViewOrderRoutes.post("/create", createOrder);
+studentViewOrderRoutes.post("/capture", capturePaymentAndFinalizeOrder);
 
-router.post("/create", createOrder);
-router.post("/capture", capturePaymentAndFinalizeOrder);
-
-module.exports = router;
+export default studentViewOrderRoutes;

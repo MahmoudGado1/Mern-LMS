@@ -1,13 +1,12 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   getCurrentCourseProgress,
   markCurrentLectureAsViewed,
   resetCurrentCourseProgress,
-} = require("../../controllers/student-controller/course-progress-controller");
+} from "../../controllers/student-controller/course-progress-controller.js";
+const studentCourseProgressRoutes = express.Router();
 
-const router = express.Router();
-
-router.get("/get/:userId/:courseId", getCurrentCourseProgress);
-router.post("/mark-lecture-viewed", markCurrentLectureAsViewed);
-router.post("/reset-progress", resetCurrentCourseProgress);
-module.exports = router;
+studentCourseProgressRoutes.get("/get/:userId/:courseId", getCurrentCourseProgress);
+studentCourseProgressRoutes.post("/mark-lecture-viewed", markCurrentLectureAsViewed);
+studentCourseProgressRoutes.post("/reset-progress", resetCurrentCourseProgress);
+export default studentCourseProgressRoutes;

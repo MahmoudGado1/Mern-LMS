@@ -1,8 +1,9 @@
-const Order = require("../../models/Order");
-const paypal = require("../../helpers/paypal");
-const StudentCourses = require("../../models/StudentCourses");
-const Course = require("../../models/Course");
-const createOrder = async (req, res) => {
+
+import Order from "../../models/Order.js";
+import paypal from "../../helpers/paypal.js";
+import StudentCourses from "../../models/StudentCourses.js";
+import Course from "../../models/Course.js";
+export const createOrder = async (req, res) => {
   try {
     const {
       userId,
@@ -98,7 +99,7 @@ const createOrder = async (req, res) => {
     });
   }
 };
-const capturePaymentAndFinalizeOrder = async (req, res) => {
+export const capturePaymentAndFinalizeOrder = async (req, res) => {
   try {
     const { paymentId, payerId, orderId } = req.body;
     let order = await Order.findById(orderId);
@@ -166,7 +167,3 @@ const capturePaymentAndFinalizeOrder = async (req, res) => {
   }
 };
 
-module.exports = {
-  createOrder,
-  capturePaymentAndFinalizeOrder,
-};

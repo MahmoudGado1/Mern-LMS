@@ -1,5 +1,4 @@
-const mongoose = require("mongoose");
-
+import mongoose from 'mongoose';
 const LectureProgressSchema = new mongoose.Schema({
   lectureId: String,
   viewed: Boolean,
@@ -13,4 +12,4 @@ const CourseProgressSchema = new mongoose.Schema({
   lecturesProgress: [LectureProgressSchema],
 }); 
 
-module.exports = mongoose.model("Progress", CourseProgressSchema);
+export default mongoose.model("Progress", CourseProgressSchema);

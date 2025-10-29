@@ -1,11 +1,11 @@
-const express=require('express')
-const { registerUser, loginUser } = require('../../controllers/auth-controller')
-const authenticateMiddleware = require('../../middleware/auth-middleware')
-const router=express.Router()
+import express from 'express'
+import { registerUser, loginUser } from '../../controllers/auth-controller/index.js'
+import { authenticate } from '../../middleware/auth-middleware.js'
+const authRoutes=express.Router()
 
-router.post('/register',registerUser)
-router.post('/login',loginUser)
-router.get('/check-auth',authenticateMiddleware,(req,res)=>{
+authRoutes.post('/register',registerUser)
+authRoutes.post('/login',loginUser)
+authRoutes.get('/check-auth',authenticate,(req,res)=>{
   const user = req.user;
   res.status(200).json({
     success: true,
@@ -17,4 +17,4 @@ router.get('/check-auth',authenticateMiddleware,(req,res)=>{
 })
 
 
-module.exports=router
+export default authRoutes

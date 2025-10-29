@@ -1,6 +1,5 @@
-const Course = require("../../models/Course");
-
-const addNewCourse = async (req, res) => {
+import Course from "../../models/Course.js";
+export const addNewCourse = async (req, res) => {
   try {
     const courseData = req.body;
     const newlyCreatedCourse = new Course(courseData);
@@ -22,7 +21,7 @@ const addNewCourse = async (req, res) => {
   }
 };
 
-const getAllCourse = async (req, res) => {
+export const getAllCourse = async (req, res) => {
   try {
     const coursesList=await Course.find({})
     res.status(200).json({
@@ -37,7 +36,7 @@ const getAllCourse = async (req, res) => {
     });
   }
 };
-const getCourseDetailsById = async (req, res) => {
+export const getCourseDetailsById = async (req, res) => {
   try {
     const { id } = req.params;
     const courseDetails = await Course.findById(id);
@@ -61,7 +60,7 @@ const getCourseDetailsById = async (req, res) => {
     });
   }
 };
-const updateCourseById = async (req, res) => {
+export const updateCourseById = async (req, res) => {
   try {
     const {id}=req.params;
     const updatedCourseData=req.body;
@@ -89,9 +88,3 @@ const updateCourseById = async (req, res) => {
   }
 };
 
-module.exports = {
-  addNewCourse,
-  getAllCourse,
-  getCourseDetailsById,
-  updateCourseById,
-};
